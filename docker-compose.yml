@@ -9,7 +9,7 @@ services:
     container_name: dd-agent
     restart: always
     environment:
-      - DD_API_KEY=981b8987de6735cf9eab0ff6c0cd17af
+      - DD_API_KEY=<API_KEY>
       - DD_SITE=datadoghq.com
       - DD_HOSTNAME=http://localhost:8082
       - DD_APM_ENABLED=true
