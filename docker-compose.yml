@@ -26,3 +26,4 @@ services:
       - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
       - /etc/passwd:/etc/passwd:ro
         #- /opt/datadog-agent/run:/opt/datadog-agent/run:rw
+   
