@@ -1,0 +1,28 @@
+version: '3'
+services:
+  my-website:
+    build: .
+    ports:
+      - 8082:80
+  datadog:
+    image: gcr.io/datadoghq/agent:7
+    container_name: dd-agent
+    restart: always
+    environment:
+      - DD_API_KEY=981b8987de6735cf9eab0ff6c0cd17af
+      - DD_SITE=datadoghq.com
+      - DD_HOSTNAME=http://localhost:8082
+      - DD_APM_ENABLED=true
+      - DD_LOGS_ENABLED=true
+      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
+      - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
+      - DD_CONTAINER_EXCLUDE=image:gcr.io/datadoghq/agent*
+      - DD_CONTAINER_EXCLUDE_METRICS=image:gcr.io/datadoghq/agent*
+      - DD_CONTAINER_EXCLUDE_LOGS=image:gcr.io/datadoghq/agent*
+      - DD_PROCESS_AGENT_ENABLED=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /etc/passwd:/etc/passwd:ro
+        #- /opt/datadog-agent/run:/opt/datadog-agent/run:rw
